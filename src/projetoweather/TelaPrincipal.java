@@ -32,10 +32,10 @@ public class TelaPrincipal {
     @SuppressWarnings("rawtypes")
 	private JList lstCidades, lstFavoritos;
     private JTextArea taClima;
-    JScrollPane favScroller;
-    BancoDeDados bd = new BancoDeDados();
-    ControleCidades cc = new ControleCidades();
-    List<Cidade> favoritas = new ArrayList<Cidade>();
+    private JScrollPane favScroller;
+    private BancoDeDados bd = new BancoDeDados();
+    private ControleCidades cc = new ControleCidades();
+    private List<Cidade> favoritas = new ArrayList<Cidade>();
 
     private GerenciadorCidades gCidades;
 
