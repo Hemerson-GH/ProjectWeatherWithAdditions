@@ -24,6 +24,9 @@ import javax.swing.event.ListSelectionListener;
 
 import BancoDeDados.BancoDeDados;
 import Control.ControleCidades;
+import Exception.BancoDadosException;
+import Exception.CidadeExistenteException;
+import Exception.ControleCidadesException;
 
 public class TelaPrincipal {
 
@@ -33,14 +36,20 @@ public class TelaPrincipal {
 	private JList lstCidades, lstFavoritos;
     private JTextArea taClima;
     private JScrollPane favScroller;
-    private BancoDeDados bd = new BancoDeDados();
+    private BancoDeDados bancoDDados = new BancoDeDados();
     private ControleCidades cc = new ControleCidades();
     private List<Cidade> favoritas = new ArrayList<Cidade>();
 
     private GerenciadorCidades gCidades;
 
 	private TelaPrincipal() {
-    	bd.Conecta();		
+		
+    	try {
+			bancoDDados.Conecta();
+		} catch (BancoDadosException dbe) {
+			JOptionPane.showMessageDialog(null, dbe.getMessage(), dbe.getTitulo(), JOptionPane.ERROR_MESSAGE);
+		}
+    	
         gCidades = new GerenciadorCidades();
         janela = new JFrame("Projeto Weather");
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,12 +68,7 @@ public class TelaPrincipal {
             taClima.append("Máxima: " + clima.getTempMax() + "ºC\n");
             taClima.append("Umidade relativa do ar: " + clima.getUmidade()+ "%");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Erro ao acessar dados da cidade!",
-                    "Erro",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(null, "Erro ao acessar dados da cidade!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -105,16 +109,20 @@ public class TelaPrincipal {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
 					
-					Cidade c = (Cidade) lstCidades.getSelectedValue();
-					boolean taks = cc.confereCidade(c.getId());
-					
-					if (taks == false) {	
+//					Cidade c = (Cidade) lstCidades.getSelectedValue();
+
+					try {
 						cc.cadastraCidade((Cidade) lstCidades.getSelectedValue());
 						favoritas = cc.buscarCidade();
 						lstFavoritos.setListData(favoritas.toArray());
-					} else {
-						JOptionPane.showMessageDialog(null, "Cidade ja cadastrada");
-					}
+					} catch (BancoDadosException dbe) {
+						JOptionPane.showMessageDialog(null, dbe.getMessage(), dbe.getTitulo(), JOptionPane.ERROR_MESSAGE);
+					} catch (CidadeExistenteException cee) {
+						JOptionPane.showMessageDialog(null, cee.getMessage(), cee.getTitulo(), JOptionPane.ERROR_MESSAGE);
+					} catch (ControleCidadesException cce) {
+						JOptionPane.showMessageDialog(null, cce.getMessage(), cce.getTitulo(), JOptionPane.ERROR_MESSAGE);
+					} 
+
 				}
 			}
         });
@@ -123,18 +131,20 @@ public class TelaPrincipal {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {					
+				if (e.getClickCount() == 2) {						
 					try {
+						
 						Cidade c = (Cidade) lstFavoritos.getSelectedValue();
 						cc.removeCidade(c);
 						favoritas = cc.buscarCidade();
 						lstFavoritos.setListData(favoritas.toArray());
-						
 						JOptionPane.showMessageDialog(null, "Cidade removida com sucesso");
-					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, "Não foi possível remover a cidade desejada");
-						System.out.println(e2);
-					}		
+						
+					} catch (BancoDadosException dbe) {
+						JOptionPane.showMessageDialog(null, dbe.getMessage(), dbe.getTitulo(), JOptionPane.ERROR_MESSAGE);
+					} catch (ControleCidadesException cce) {
+						JOptionPane.showMessageDialog(null, cce.getMessage(), cce.getTitulo(), JOptionPane.ERROR_MESSAGE);
+					} 
 				}
 			}
         });
@@ -165,7 +175,13 @@ public class TelaPrincipal {
         pClima.setBorder(BorderFactory.createTitledBorder("Clima"));
         pClima.add(taScroller, BorderLayout.PAGE_END);
         
-        favoritas = cc.buscarCidade();
+        try {
+			favoritas = cc.buscarCidade();
+    	} catch (BancoDadosException dbe) {
+			JOptionPane.showMessageDialog(null, dbe.getMessage(), dbe.getTitulo(), JOptionPane.ERROR_MESSAGE);
+		} catch (ControleCidadesException cce) {
+			JOptionPane.showMessageDialog(null, cce.getMessage(), cce.getTitulo(), JOptionPane.ERROR_MESSAGE);
+		} 
         
         lstFavoritos = new JList();
         lstFavoritos.setListData(favoritas.toArray());

@@ -7,13 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import BancoDeDados.BancoDeDados;
+import Exception.BancoDadosException;
+import Exception.CidadeExistenteException;
+import Exception.ControleCidadesException;
 import projetoweather.Cidade;
 
 public class ControleCidades {
 	
 	private BancoDeDados bancoDados = new BancoDeDados();
 	
-	public void cadastraCidade(Cidade cidade){
+	public void cadastraCidade(Cidade cidade) throws CidadeExistenteException, BancoDadosException, ControleCidadesException{
+		
+		if (confereCidade(cidade.getId())) {
+			throw new CidadeExistenteException(cidade.getNome(), "Cidade Já Cadastrada");
+		}
+		
 		bancoDados.Conecta();
 		
 		try {
@@ -22,17 +30,17 @@ public class ControleCidades {
 			pst.setInt(2, cidade.getId());		
 			pst.setString(3, cidade.getPais());
 			pst.execute();
-//			JOptionPane.showMessageDialog(null, "Salvo Com Sucesso");
-		} catch (SQLException ex) {
-//			JOptionPane.showMessageDialog(null, "Erro Ao Salvar Dado: \n " + ex);
-			ex.printStackTrace();
+
+		} catch (SQLException sqlex) {
+			throw new ControleCidadesException("Não foi possível cadastrar essa cidade\n" + sqlex.getMessage(), "Erro Ao Cadastrar Cidade");
 		} finally {
 			bancoDados.Desconecta();
 		}
 	}
 	
-	public boolean removeCidade(Cidade cidade){
+	public boolean removeCidade(Cidade cidade) throws BancoDadosException, ControleCidadesException{
 		boolean encontrou = false;
+		
 		bancoDados.Conecta();
 		
 		try {
@@ -42,21 +50,19 @@ public class ControleCidades {
 			pst.execute();
 			pst.close();	
 			encontrou = true;
-	    } catch (SQLException ex) {
-//				ex.getMessage();
-				ex.printStackTrace();
+	    } catch (SQLException sqlex) {
+	    	throw new ControleCidadesException("Não foi possível remover essa cidade\n" + sqlex.getMessage(), "Erro Ao Remover Cidade");
 	    } finally {
 			bancoDados.Desconecta();
 		}
 		return encontrou;
 	}
 	
-	public List<Cidade> buscarCidade(){
+	public List<Cidade> buscarCidade() throws BancoDadosException, ControleCidadesException{
 		bancoDados.Conecta();	
 		List<Cidade> cidadesEncontradas = new ArrayList<Cidade>();
 		
 		try {
-//			PreparedStatement pst = bancoDados.connection.prepareStatement("SELECT * FROM favoritos Where id = '" + 0 + "'");
 			PreparedStatement pst = bancoDados.getConnection().prepareStatement("SELECT * FROM favoritos");
 			ResultSet rs = pst.executeQuery();	
 			
@@ -65,31 +71,37 @@ public class ControleCidades {
 				Cidade c = new Cidade(rs.getInt("id_cidade"), rs.getString("nome_cidade"), rs.getString("pasi"));
 				cidadesEncontradas.add(c);
 			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		} catch (SQLException sqlex) {
+			throw new ControleCidadesException("Não foi possível buscar suas cidades favoritas\n" + sqlex.getMessage(), "Erro Ao Buscar Cidade");
 		} finally {
 			bancoDados.Desconecta();
 		}
+		
 		return cidadesEncontradas;
 	}
 	
-	public boolean confereCidade(int id){
+	public boolean confereCidade(int id) throws BancoDadosException, ControleCidadesException{
 		bancoDados.Conecta();	
 		boolean encontrei = false;
 		
 		try {
-//			PreparedStatement pst = bancoDados.connection.prepareStatement("SELECT * FROM favoritos Where id_cidade = '" + id +"'");
-			PreparedStatement pst = bancoDados.getConnection().prepareStatement("SELECT * FROM favoritos Where id_cidade = '" + id +"'");
+			PreparedStatement pst = bancoDados.getConnection().prepareStatement("SELECT * FROM favoritos Where id_cidade = ?");
 			ResultSet rs = pst.executeQuery();	
+			
+			pst.setInt(1, id);
+			pst.execute();	
+			pst.close();
 			
 			if (rs.next()) {	
 				encontrei = true;
 			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+			
+		} catch (SQLException sqlex) {
+			throw new ControleCidadesException("Não foi possível encontrar essa cidade\n" + sqlex.getMessage(), "Erro Ao Buscar Cidade");
 		} finally {
 			bancoDados.Desconecta();
 		}
+		
 		return encontrei;
 	}	
 }
