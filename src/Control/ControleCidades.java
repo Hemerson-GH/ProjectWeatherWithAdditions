@@ -25,7 +25,7 @@ public class ControleCidades {
 		bancoDados.Conecta();
 		
 		try {
-			PreparedStatement pst = bancoDados.getConnection().prepareStatement("insert into favoritos(nome_cidade, id_cidade, pasi) values(?,?,?)");
+			PreparedStatement pst = bancoDados.getConnection().prepareStatement("insert into favoritos(nome_cidade, id_cidade, pais) values(?,?,?)");
 			pst.setString(1, cidade.getNome());		
 			pst.setInt(2, cidade.getId());		
 			pst.setString(3, cidade.getPais());
@@ -68,7 +68,7 @@ public class ControleCidades {
 			
 			while (rs.next()) {
 				
-				Cidade c = new Cidade(rs.getInt("id_cidade"), rs.getString("nome_cidade"), rs.getString("pasi"));
+				Cidade c = new Cidade(rs.getInt("id_cidade"), rs.getString("nome_cidade"), rs.getString("pais"));
 				cidadesEncontradas.add(c);
 			}
 		} catch (SQLException sqlex) {
@@ -85,17 +85,13 @@ public class ControleCidades {
 		boolean encontrei = false;
 		
 		try {
-			PreparedStatement pst = bancoDados.getConnection().prepareStatement("SELECT * FROM favoritos Where id_cidade = ?");
+			PreparedStatement pst = bancoDados.getConnection().prepareStatement("SELECT * FROM favoritos WHERE id_cidade = ?");
+			pst.setInt(1, id);			
 			ResultSet rs = pst.executeQuery();	
-			
-			pst.setInt(1, id);
-			pst.execute();	
-			pst.close();
 			
 			if (rs.next()) {	
 				encontrei = true;
 			}
-			
 		} catch (SQLException sqlex) {
 			throw new ControleCidadesException("Não foi possível encontrar essa cidade\n" + sqlex.getMessage(), "Erro Ao Buscar Cidade");
 		} finally {

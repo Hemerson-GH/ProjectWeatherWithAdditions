@@ -42,19 +42,4 @@ public class GerenciadorCidades {
         }        
         return cidadesEncontradas;
     }
-    
-    public Cidade validaCidade(String nomeCidade) {
-        Cidade cidadesEncontrada = null;
-        for(Cidade c : cidades) {
-        	
-            if (c.getNome().contains(nomeCidade)) {
-                cidadesEncontrada = new Cidade(c.getId(), c.getNome(), c.getPais());
-            }
-            if (c.getNome().contains("Lavr")) {
-            	System.out.println(c.getNome());
-            }
-        }       
-        return cidadesEncontrada;
-    }
-    
 }

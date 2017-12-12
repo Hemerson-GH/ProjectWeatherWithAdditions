@@ -108,9 +108,6 @@ public class TelaPrincipal {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-					
-//					Cidade c = (Cidade) lstCidades.getSelectedValue();
-
 					try {
 						cc.cadastraCidade((Cidade) lstCidades.getSelectedValue());
 						favoritas = cc.buscarCidade();
