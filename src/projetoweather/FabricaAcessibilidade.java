@@ -1,5 +1,7 @@
 package projetoweather;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -10,32 +12,34 @@ public class FabricaAcessibilidade extends FabricaElementosGraficos{
 
 	@Override
 	public JFrame CriarFrame(String msg) {
-		// TODO Auto-generated method stub
-		return null;
+		JFrame fr = new JFrame(msg);
+		fr.getContentPane().setBackground(Color.LIGHT_GRAY);
+		return fr;
 	}
 
 	@Override
 	public JLabel CriarLabel(String msg) {
-		// TODO Auto-generated method stub
-		return null;
+		JLabel lb = new JLabel(msg);
+        lb.setBackground(Color.CYAN); // change
+        lb.setOpaque(true);// change
+        lb.setForeground(Color.BLACK);// change
+        return lb;
 	}
 
 	@Override
 	public JTextField CriarTextField(String msg) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public JTextArea CriarTextArea(String msg) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public JList CriarJList(String msg) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

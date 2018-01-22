@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 public abstract class FabricaElementosGraficos {
 	
 	public abstract JFrame CriarFrame(String msg);	
-//	public abstract JButton CriarButton(String msg);
     public abstract JLabel CriarLabel(String msg);    
     public abstract JTextField CriarTextField(String msg);    
     public abstract JTextArea CriarTextArea(String msg);    

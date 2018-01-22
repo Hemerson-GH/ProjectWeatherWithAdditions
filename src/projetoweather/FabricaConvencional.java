@@ -10,32 +10,29 @@ public class FabricaConvencional extends FabricaElementosGraficos{
 
 	@Override
 	public JFrame CriarFrame(String msg) {
-		// TODO Auto-generated method stub
-		return null;
+		JFrame fr = new JFrame(msg);
+		return fr;
 	}
 
 	@Override
 	public JLabel CriarLabel(String msg) {
-		// TODO Auto-generated method stub
-		return null;
+		JLabel lbl = new JLabel(msg);
+        return lbl;
 	}
 
 	@Override
 	public JTextField CriarTextField(String msg) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public JTextArea CriarTextArea(String msg) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public JList CriarJList(String msg) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
