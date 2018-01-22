@@ -30,6 +30,7 @@ import Exception.ControleCidadesException;
 
 public class TelaPrincipal {
 
+	private FabricaElementosGraficos fabrica;
     private JFrame janela;
     private JTextField tfBuscarCidade;
     @SuppressWarnings("rawtypes")
@@ -51,7 +52,25 @@ public class TelaPrincipal {
 		}
     	
         gCidades = new GerenciadorCidades();
-        janela = new JFrame("Projeto Weather");
+        
+        String[] themes = {"Convencional", "Dark", "Acessibilidade"};
+        String s = (String)JOptionPane.showInputDialog(null, "Escolha o tema desejado:\n",
+                   "Temas", JOptionPane.PLAIN_MESSAGE, null, themes, "Convencional");
+        
+        if (s == null) {
+			System.exit(1);
+		} else if (s.equals("Convencional")) {
+			fabrica = new FabricaConvencional();
+		} else if (s.equals("Dark")) {
+			fabrica = new FabricaDark();
+		} else if (s.equals("Acessibilidade")) {
+			fabrica = new FabricaAcessibilidade();
+		}
+        
+        
+//        janela = new JFrame("Projeto Weather");
+        janela = fabrica.CriarFrame("Project Weather - Tema " + s);
+        
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.getContentPane().setLayout(new BorderLayout());
         construirComponentes();
@@ -149,7 +168,7 @@ public class TelaPrincipal {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	private void construirComponentes() {
-        tfBuscarCidade = new JTextField(30);
+        tfBuscarCidade = new JTextField(30); // fabrica . criartextfield
 
         lstCidades = new JList();
         lstCidades.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
