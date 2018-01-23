@@ -3,9 +3,9 @@ package projetoweather;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -23,30 +23,21 @@ public class FabricaDark extends FabricaElementosGraficos{
 	}
 
 	@Override
-	public JLabel CreateLabel(String msg) {
-		JLabel lb = new JLabel(msg);
-        lb.setBackground(Color.BLACK);
-        lb.setOpaque(true);
-        lb.setForeground(Color.YELLOW);
-        return lb;
-	}
-
-	@Override
 	public JTextField CreateTextField(int n) {
 		JTextField textField = new JTextField(n);
-		
-		
+		textField.setFont(new Font("Arial", Font.PLAIN, 14));
+		textField.setBackground(Color.DARK_GRAY);
+		textField.setForeground(Color.RED);
 		return textField;
 	}
 
 	@Override
 	public JTextArea CreateTextArea() {
 		JTextArea textArea = new JTextArea();
-		
+		textArea.setFont(new Font("Arial", Font.PLAIN, 14));
 		textArea.setEditable(false);
-		
-		
-		
+		textArea.setBackground(Color.DARK_GRAY);
+		textArea.setForeground(Color.RED);
 		return textArea;
 	}
 
@@ -54,20 +45,29 @@ public class FabricaDark extends FabricaElementosGraficos{
 	@Override
 	public JList CreateJList() {
 		JList list = new JList();
-		
-		
-		
+		list.setFont(new Font("Arial", Font.PLAIN, 14));
+		list.setBackground(Color.DARK_GRAY);
+		list.setForeground(Color.RED);
 		return list;
 	}
 
 	@Override
-	public JPanel CreatePanel(int w, int h, String title) {
-		JPanel pCidade = new JPanel(new BorderLayout(w, h));
-        pCidade.setForeground(Color.BLACK);
-        pCidade.setBackground(Color.BLACK);
-        pCidade.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), 
-        		title, TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 15), Color.RED));
-        return pCidade;
+	public JPanel CreatePanelGrid(int w, int h, String title) {
+		JPanel panel = new JPanel(new GridLayout(w, h));
+		panel.setForeground(Color.BLACK);
+		panel.setBackground(Color.BLACK);
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), 
+				title, TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 14), Color.RED));
+        return panel;
 	}
 
+	@Override
+	public JPanel CreatePanelBorder(int w, int h, String title) {
+		JPanel panel = new JPanel(new BorderLayout(w, h));
+		panel.setForeground(Color.BLACK);
+		panel.setBackground(Color.BLACK);
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), 
+				title, TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 14), Color.RED));
+        return panel;
+	}
 }

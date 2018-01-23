@@ -36,7 +36,7 @@ public class GerenciadorCidades {
     public List<Cidade> buscarCidades(String nomeCidade) {
         List<Cidade> cidadesEncontradas = new ArrayList<Cidade>();
         for(Cidade c : cidades) {
-            if (c.getNome().contains(nomeCidade)) {
+            if ((c.getNome().toUpperCase()).contains(nomeCidade.toUpperCase())) {
                 cidadesEncontradas.add(c);
             }
         }        

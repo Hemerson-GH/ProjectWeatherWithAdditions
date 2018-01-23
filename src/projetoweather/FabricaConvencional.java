@@ -1,7 +1,10 @@
 package projetoweather;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -12,11 +15,6 @@ public class FabricaConvencional extends FabricaElementosGraficos{
 	@Override
 	public JFrame CreateFrame(String msg) {
 		return new JFrame(msg);
-	}
-
-	@Override
-	public JLabel CreateLabel(String msg) {
-        return new JLabel(msg);
 	}
 
 	@Override
@@ -38,8 +36,17 @@ public class FabricaConvencional extends FabricaElementosGraficos{
 	}
 
 	@Override
-	public JPanel CreatePanel(int w, int h, String title) {
-		return new JPanel();
+	public JPanel CreatePanelGrid(int w, int h, String title) {
+		JPanel panel = new JPanel(new GridLayout(w, h));
+		panel.setBorder(BorderFactory.createTitledBorder(title));
+        return panel;
+	}
+
+	@Override
+	public JPanel CreatePanelBorder(int w, int h, String title) {
+		JPanel panel = new JPanel(new BorderLayout(w, h));
+		panel.setBorder(BorderFactory.createTitledBorder(title));
+        return panel;
 	}
 
 }

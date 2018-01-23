@@ -66,9 +66,7 @@ public class TelaPrincipal {
 		}
         
         
-//        janela = new JFrame("Projeto Weather");
         janela = fabrica.CreateFrame("Project Weather - Tema " + s);
-        
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.getContentPane().setLayout(new BorderLayout());
         construirComponentes();
@@ -166,7 +164,7 @@ public class TelaPrincipal {
 
     @SuppressWarnings("unchecked")
 	private void construirComponentes() {
-        tfBuscarCidade = fabrica.CreateTextField(30); // fabrica . Createtextfield
+        tfBuscarCidade = fabrica.CreateTextField(30);
 
         lstCidades = fabrica.CreateJList(); 
         lstCidades.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -174,18 +172,16 @@ public class TelaPrincipal {
         JScrollPane lstScroller = new JScrollPane(lstCidades);
         lstScroller.setPreferredSize(new Dimension(250, 150));
 
-        JPanel pCidade = fabrica.CreatePanel(5, 5, "Selecione a Cidade");
+        JPanel pCidade = fabrica.CreatePanelBorder(5, 5, "Selecione a Cidade");
         pCidade.add(tfBuscarCidade, BorderLayout.PAGE_START);
         pCidade.add(lstScroller, BorderLayout.CENTER);
 
         taClima = fabrica.CreateTextArea();
-        //taClima.setEditable(false);
 
         JScrollPane taScroller = new JScrollPane(taClima);
         taScroller.setPreferredSize(new Dimension(250, 80));
 
-        JPanel pClima = fabrica.CreatePanel(1, 1, "Clima");
-        //pClima.setBorder(BorderFactory.createTitledBorder("Clima"));
+        JPanel pClima = fabrica.CreatePanelGrid(1, 1, "Clima");
         pClima.add(taScroller, BorderLayout.PAGE_END);
         
         try {
@@ -203,8 +199,7 @@ public class TelaPrincipal {
         favScroller = new JScrollPane(lstFavoritos);
         favScroller.setPreferredSize(new Dimension(250, 80));
 
-        JPanel pFavorites = fabrica.CreatePanel(1, 1, "Favoritos");
-       // pFavorites.setBorder(BorderFactory.createTitledBorder("Favoritos"));
+        JPanel pFavorites = fabrica.CreatePanelGrid(1, 1, "Favoritos");
         pFavorites.add(favScroller, BorderLayout.CENTER);
         
         janela.getContentPane().add(pCidade, BorderLayout.PAGE_START);
