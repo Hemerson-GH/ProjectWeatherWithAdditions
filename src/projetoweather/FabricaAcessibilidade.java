@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -40,6 +41,12 @@ public class FabricaAcessibilidade extends FabricaElementosGraficos{
 	@SuppressWarnings("rawtypes")
 	@Override
 	public JList CriarJList(String msg) {
+		return null;
+	}
+
+	@Override
+	public JPanel CriarPanel() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

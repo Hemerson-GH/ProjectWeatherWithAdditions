@@ -176,8 +176,9 @@ public class TelaPrincipal {
         JScrollPane lstScroller = new JScrollPane(lstCidades);
         lstScroller.setPreferredSize(new Dimension(250, 150));
 
-        JPanel pCidade = new JPanel(new BorderLayout(5, 5));
-        pCidade.setBorder(BorderFactory.createTitledBorder("Selecionar Cidade"));
+        JPanel pCidade = fabrica.CriarPanel();
+//        JPanel pCidade = new JPanel(new BorderLayout(5, 5));
+//        pCidade.setBorder(BorderFactory.createTitledBorder("Selecionar Cidade"));
         pCidade.add(tfBuscarCidade, BorderLayout.PAGE_START);
         pCidade.add(lstScroller, BorderLayout.CENTER);
 
