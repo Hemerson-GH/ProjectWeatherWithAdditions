@@ -2,7 +2,6 @@ package projetoweather;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -10,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -69,7 +67,7 @@ public class TelaPrincipal {
         
         
 //        janela = new JFrame("Projeto Weather");
-        janela = fabrica.CriarFrame("Project Weather - Tema " + s);
+        janela = fabrica.CreateFrame("Project Weather - Tema " + s);
         
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.getContentPane().setLayout(new BorderLayout());
@@ -166,30 +164,28 @@ public class TelaPrincipal {
         });
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings("unchecked")
 	private void construirComponentes() {
-        tfBuscarCidade = new JTextField(30); // fabrica . criartextfield
+        tfBuscarCidade = fabrica.CreateTextField(30); // fabrica . Createtextfield
 
-        lstCidades = new JList();
+        lstCidades = fabrica.CreateJList(); 
         lstCidades.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		
         JScrollPane lstScroller = new JScrollPane(lstCidades);
         lstScroller.setPreferredSize(new Dimension(250, 150));
 
-        JPanel pCidade = fabrica.CriarPanel();
-//        JPanel pCidade = new JPanel(new BorderLayout(5, 5));
-//        pCidade.setBorder(BorderFactory.createTitledBorder("Selecionar Cidade"));
+        JPanel pCidade = fabrica.CreatePanel(5, 5, "Selecione a Cidade");
         pCidade.add(tfBuscarCidade, BorderLayout.PAGE_START);
         pCidade.add(lstScroller, BorderLayout.CENTER);
 
-        taClima = new JTextArea();
-        taClima.setEditable(false);
+        taClima = fabrica.CreateTextArea();
+        //taClima.setEditable(false);
 
         JScrollPane taScroller = new JScrollPane(taClima);
         taScroller.setPreferredSize(new Dimension(250, 80));
 
-        JPanel pClima = new JPanel(new GridLayout(1, 1));
-        pClima.setBorder(BorderFactory.createTitledBorder("Clima"));
+        JPanel pClima = fabrica.CreatePanel(1, 1, "Clima");
+        //pClima.setBorder(BorderFactory.createTitledBorder("Clima"));
         pClima.add(taScroller, BorderLayout.PAGE_END);
         
         try {
@@ -200,15 +196,15 @@ public class TelaPrincipal {
 			JOptionPane.showMessageDialog(null, cce.getMessage(), cce.getTitulo(), JOptionPane.ERROR_MESSAGE);
 		} 
         
-        lstFavoritos = new JList();
+        lstFavoritos = fabrica.CreateJList(); 
         lstFavoritos.setListData(favoritas.toArray());
         lstFavoritos.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
         favScroller = new JScrollPane(lstFavoritos);
         favScroller.setPreferredSize(new Dimension(250, 80));
 
-        JPanel pFavorites = new JPanel(new GridLayout(1, 1));
-        pFavorites.setBorder(BorderFactory.createTitledBorder("Favoritos"));
+        JPanel pFavorites = fabrica.CreatePanel(1, 1, "Favoritos");
+       // pFavorites.setBorder(BorderFactory.createTitledBorder("Favoritos"));
         pFavorites.add(favScroller, BorderLayout.CENTER);
         
         janela.getContentPane().add(pCidade, BorderLayout.PAGE_START);

@@ -10,37 +10,36 @@ import javax.swing.JTextField;
 public class FabricaConvencional extends FabricaElementosGraficos{
 
 	@Override
-	public JFrame CriarFrame(String msg) {
-		JFrame fr = new JFrame(msg);
-		return fr;
+	public JFrame CreateFrame(String msg) {
+		return new JFrame(msg);
 	}
 
 	@Override
-	public JLabel CriarLabel(String msg) {
-		JLabel lbl = new JLabel(msg);
-        return lbl;
+	public JLabel CreateLabel(String msg) {
+        return new JLabel(msg);
 	}
 
 	@Override
-	public JTextField CriarTextField(String msg) {
-		return null;
+	public JTextField CreateTextField(int n) {
+		return new JTextField(n);
 	}
 
 	@Override
-	public JTextArea CriarTextArea(String msg) {
-		return null;
+	public JTextArea CreateTextArea() {
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		return textArea;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public JList CriarJList(String msg) {
-		return null;
+	public JList CreateJList() {
+		return new JList();
 	}
 
 	@Override
-	public JPanel CriarPanel() {
-		// TODO Auto-generated method stub
-		return null;
+	public JPanel CreatePanel(int w, int h, String title) {
+		return new JPanel();
 	}
 
 }

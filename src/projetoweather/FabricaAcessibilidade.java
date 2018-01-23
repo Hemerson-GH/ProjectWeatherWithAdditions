@@ -12,14 +12,14 @@ import javax.swing.JTextField;
 public class FabricaAcessibilidade extends FabricaElementosGraficos{
 
 	@Override
-	public JFrame CriarFrame(String msg) {
+	public JFrame CreateFrame(String msg) {
 		JFrame fr = new JFrame(msg);
 		fr.getContentPane().setBackground(Color.LIGHT_GRAY);
 		return fr;
 	}
 
 	@Override
-	public JLabel CriarLabel(String msg) {
+	public JLabel CreateLabel(String msg) {
 		JLabel lb = new JLabel(msg);
         lb.setBackground(Color.CYAN); // change
         lb.setOpaque(true);// change
@@ -28,24 +28,24 @@ public class FabricaAcessibilidade extends FabricaElementosGraficos{
 	}
 
 	@Override
-	public JTextField CriarTextField(String msg) {
+	public JTextField CreateTextField(int n) {
 		
 		return null;
 	}
 
 	@Override
-	public JTextArea CriarTextArea(String msg) {
+	public JTextArea CreateTextArea() {
 		return null;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public JList CriarJList(String msg) {
+	public JList CreateJList() {
 		return null;
 	}
 
 	@Override
-	public JPanel CriarPanel() {
+	public JPanel CreatePanel(int w, int h, String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}

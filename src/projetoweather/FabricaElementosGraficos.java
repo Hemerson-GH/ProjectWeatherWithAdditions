@@ -9,12 +9,12 @@ import javax.swing.JTextField;
 
 public abstract class FabricaElementosGraficos {
 	
-	public abstract JFrame CriarFrame(String msg);	
-	public abstract JPanel CriarPanel();	
-    public abstract JLabel CriarLabel(String msg);    
-    public abstract JTextField CriarTextField(String msg);    
-    public abstract JTextArea CriarTextArea(String msg);    
+	public abstract JFrame CreateFrame(String msg);	
+	public abstract JPanel CreatePanel(int w, int h, String title);	
+    public abstract JLabel CreateLabel(String msg);    
+    public abstract JTextField CreateTextField(int n);    
+    public abstract JTextArea CreateTextArea();    
     @SuppressWarnings("rawtypes")
-	public abstract JList CriarJList(String msg);    
+	public abstract JList CreateJList();    
 
 }

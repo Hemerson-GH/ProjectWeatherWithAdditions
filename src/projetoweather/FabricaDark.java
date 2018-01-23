@@ -16,14 +16,14 @@ import javax.swing.border.TitledBorder;
 public class FabricaDark extends FabricaElementosGraficos{
 	
 	@Override
-	public JFrame CriarFrame(String msg) {
+	public JFrame CreateFrame(String msg) {
 		JFrame fr = new JFrame(msg);
 		fr.getContentPane().setBackground(Color.black);
 		return fr;
 	}
 
 	@Override
-	public JLabel CriarLabel(String msg) {
+	public JLabel CreateLabel(String msg) {
 		JLabel lb = new JLabel(msg);
         lb.setBackground(Color.BLACK);
         lb.setOpaque(true);
@@ -32,29 +32,41 @@ public class FabricaDark extends FabricaElementosGraficos{
 	}
 
 	@Override
-	public JTextField CriarTextField(String msg) {
+	public JTextField CreateTextField(int n) {
+		JTextField textField = new JTextField(n);
 		
-		return null;
+		
+		return textField;
 	}
 
 	@Override
-	public JTextArea CriarTextArea(String msg) {
-		return null;
+	public JTextArea CreateTextArea() {
+		JTextArea textArea = new JTextArea();
+		
+		textArea.setEditable(false);
+		
+		
+		
+		return textArea;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public JList CriarJList(String msg) {
-		return null;
+	public JList CreateJList() {
+		JList list = new JList();
+		
+		
+		
+		return list;
 	}
 
 	@Override
-	public JPanel CriarPanel() {
-		JPanel pCidade = new JPanel(new BorderLayout(5, 5));
+	public JPanel CreatePanel(int w, int h, String title) {
+		JPanel pCidade = new JPanel(new BorderLayout(w, h));
         pCidade.setForeground(Color.BLACK);
         pCidade.setBackground(Color.BLACK);
         pCidade.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), 
-        		"Selecione a Cidade", TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 15), Color.RED));
+        		title, TitledBorder.LEADING, TitledBorder.TOP, new Font("Arial", Font.PLAIN, 15), Color.RED));
         return pCidade;
 	}
 
